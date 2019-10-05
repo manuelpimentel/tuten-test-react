@@ -205,9 +205,14 @@ class Login extends Component {
         const state = { ...this.state };
         state.filter = e.currentTarget.value;
         console.log(state);
-        state.filteredData = state.data.filter(f =>
+        /*state.filteredData = state.data.filter(f =>
             f.bookingId.includes(state.filter)
-        );
+        );*/
+        state.data.forEach(f => {
+            if (f.bookingId.includes(state.filter)) {
+                state.filteredData.push(f);
+            }
+        });
         console.log(state);
         this.setState(state);
     };
