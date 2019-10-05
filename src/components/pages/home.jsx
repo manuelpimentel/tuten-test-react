@@ -92,16 +92,6 @@ class Login extends Component {
         } else {
             return (
                 <div className="container">
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Filter</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="filter"
-                            placeholder="Buscar"
-                            onChange={this.handleSearch}
-                            value={this.state.filter}
-                        />
-                    </Form.Group>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
