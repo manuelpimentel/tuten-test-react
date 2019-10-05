@@ -6,9 +6,9 @@ class Login extends Component {
     state = {
         stage: 'LoggingIn',
         user: {},
-        username: 'testapis@tuten.cl',
-        app: 'APP_BCK',
-        password: '1234',
+        username: '',
+        app: '',
+        password: '',
         filter: '',
         data: [],
         filteredData: [],
@@ -92,6 +92,16 @@ class Login extends Component {
         } else {
             return (
                 <div className="container">
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Filter</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="filter"
+                            placeholder="Buscar"
+                            onChange={this.handleSearch}
+                            value={this.state.filter}
+                        />
+                    </Form.Group>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -195,14 +205,16 @@ class Login extends Component {
         const state = { ...this.state };
         state.filter = e.currentTarget.value;
         console.log(state);
-        /*state.filteredData = state.data.filter(f =>
-            f.bookingId.includes(state.filter)
-        );*/
-        state.data.forEach(f => {
-            if (f.bookingId.includes(state.filter)) {
-                state.filteredData.push(f);
-            }
-        });
+        state.filteredData = state.data.filter(
+            f => f.bookingId == state.filter
+        );
+        /*
+            state.data.forEach(f => {
+                if (f.bookingId.includes(state.filter)) {
+                    state.filteredData.push(f);
+                }
+            });
+      */
         console.log(state);
         this.setState(state);
     };
