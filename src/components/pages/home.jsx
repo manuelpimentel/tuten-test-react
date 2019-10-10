@@ -6,14 +6,19 @@ class Login extends Component {
     state = {
         stage: 'LoggingIn',
         user: {},
-        username: '',
-        app: '',
-        password: '',
+        username: 'testapis@tuten.cl',
+        app: 'APP_BCK',
+        password: '1234',
         filter: '',
         data: [],
         filteredData: [],
         renderError: ''
     };
+
+    constructor() {
+        super();
+    }
+
     render() {
         return <div className="container-fluid">{this.renderFrontPage()}</div>;
     }
@@ -92,6 +97,16 @@ class Login extends Component {
         } else {
             return (
                 <div className="container">
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Filter</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="filter"
+                            placeholder="Buscar"
+                            onChange={this.handleSearch}
+                            value={this.state.filter}
+                        />
+                    </Form.Group>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -193,18 +208,26 @@ class Login extends Component {
 
     handleSearch = e => {
         const state = { ...this.state };
-        state.filter = e.currentTarget.value;
-        console.log(state);
+        state.filter = e.currentTarget.value.toLowerCase();
+
         state.filteredData = state.data.filter(
-            f => f.bookingId == state.filter
+            f =>
+                f.bookingId
+                    .toString()
+                    .toLowerCase()
+                    .includes(state.filter) ||
+                f.bookingPrice
+                    .toString()
+                    .toLowerCase()
+                    .includes(state.filter) ||
+                f.bookingTime
+                    .toString()
+                    .toLowerCase()
+                    .includes(state.filter) ||
+                f.fullName.toLowerCase().includes(state.filter) ||
+                f.streetAddress.toLowerCase().includes(state.filter)
         );
-        /*
-            state.data.forEach(f => {
-                if (f.bookingId.includes(state.filter)) {
-                    state.filteredData.push(f);
-                }
-            });
-      */
+
         console.log(state);
         this.setState(state);
     };
