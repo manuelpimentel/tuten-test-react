@@ -6,9 +6,9 @@ class Login extends Component {
     state = {
         stage: 'LoggingIn',
         user: {},
-        username: 'testapis@tuten.cl',
-        app: 'APP_BCK',
-        password: '1234',
+        username: '',
+        app: '',
+        password: '',
         filter: '',
         data: [],
         filteredData: [],
